@@ -60,8 +60,8 @@ public class GamePanel extends JPanel implements Runnable{  // Rozpoczyna defini
     public void paintComponent(Graphics g) {
         super.paintComponent(g); // Rysuje tło i komponenty panelu
 
-        Graphics2D g2 = (Graphics2D)g;
+        Graphics2D g2 = (Graphics2D)g; //Zaawansowane rysowanie
 
-        board.draw(g2);
+        board.draw(g2); // Wywołuje metodę draw z obiektu board, aby narysować planszę na panelu gry
     }
 }

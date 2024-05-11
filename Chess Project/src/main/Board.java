@@ -30,7 +30,7 @@ public class Board {
                 // Narysowanie kwadratu na planszy
                 g2.fillRect(col*SQUARE_SIZE, row*SQUARE_SIZE, SQUARE_SIZE, SQUARE_SIZE);
             }
-
+            // Rozwiązuje problem z kolorami pól we wszsytkich wierszach
             if(color == 0) {
                 color = 1;
             } else {
