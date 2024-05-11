@@ -1,7 +1,6 @@
 package main;
 
 import javax.swing.JFrame; // Klasa J.Frame która jest komponentem GUI w Java Swing, który reprezentuje okno aplikacji.
-
 // Metoda main - punkt wejścia programu. Tworzy i konfiguruje główne okno aplikacji
 public class Main {
     public static void main(String[] args) {
@@ -18,5 +17,6 @@ public class Main {
         window.setLocationRelativeTo(null); // Ustawienie położenia okna na środku ekranu
         window.setVisible(true);// Ustawienie widoczności okna
 
+        gp.launchGame(); //Uruchamia grę
     }
 }
