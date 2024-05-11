@@ -6,11 +6,11 @@ public class Pawn extends Piece{
 
     public Pawn(int color, int column, int row) {
         super(color, column, row);
-        
+
         if(color == GamePanel.WHITE) {
-            image = getImage("/piece/w_pawn");
+            image = getImage("/res/piece/w_pawn");
         } else {
-            image = getImage("/piece/b_pawn") ;
+            image = getImage("/res/piece/b_pawn") ;
         }
     }
         
