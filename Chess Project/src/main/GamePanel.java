@@ -3,15 +3,17 @@ package main;
 import java.awt.Color; //Importuje klasę Color z pakietu java.awt, która pozwala używać kolorów w interfejsie użytkownika.
 import java.awt.Dimension; //Importuje klasę Dimension z pakietu java.awt, która jest używana do określania wymiarów obiektów, takich jak rozmiar panelu.
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 
 import javax.swing.JPanel; //Importuje klasę JPanel z pakietu javax.swing, która jest kontenerem, który można używać do grupowania innych komponentów GUI.
 
 public class GamePanel extends JPanel implements Runnable{  // Rozpoczyna definicję klasy GamePanel, która dziedziczy po klasie JPanel i implementuje interfejs Runnable, co oznacza, że GamePanel będzie działać jak standardowy panel swingowy oraz będzie możliwe uruchomienie go jako wątek.
     
-    public static final int WIDTH = 1100; //stała, szerokość panelu
-    public static final int HEIGHT = 800; //stała, wysokość panelu
+    public static final int WIDTH = 1250; //stała, szerokość panelu
+    public static final int HEIGHT = 1000; //stała, wysokość panelu
     final int FPS = 60; // Stała, liczba klatek na sekundę
     Thread gameThread; // Wątek gry
+    Board board = new Board();
 
     public GamePanel() {
         setPreferredSize(new Dimension(WIDTH,HEIGHT)); //ustawia rozmiar panelu korzystająć z obiektu 'Dimension'
@@ -57,5 +59,9 @@ public class GamePanel extends JPanel implements Runnable{  // Rozpoczyna defini
     //metoda dziedziczona z klasy JPanel która słuzy do rysowania zawartości panelu.
     public void paintComponent(Graphics g) {
         super.paintComponent(g); // Rysuje tło i komponenty panelu
+
+        Graphics2D g2 = (Graphics2D)g;
+
+        board.draw(g2);
     }
 }
