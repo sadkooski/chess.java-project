@@ -99,6 +99,13 @@ public class Piece {
         return false;
     }
 
+    public boolean isSameSquare(int targetCol, int targetRow) {
+        if(targetCol == preCol && targetRow == preRow) {
+            return true;
+        }
+        return false;
+    }
+
     public Piece getHittingP(int targetCol, int targetRow) {
         for(Piece piece : GamePanel.simPieces) {
             if(piece.column == targetCol && piece.row == targetRow && piece != this) {
@@ -122,6 +129,51 @@ public class Piece {
             }
         }
 
+        return false;
+    }
+
+    public boolean pieceIsOnStraightLine(int targetCol, int targetRow) {
+        
+        /// Pionek poorusza się w lewo
+        for(int c = preCol-1; c > targetCol; c--) {
+            for(Piece piece : GamePanel.simPieces) {
+                if(piece.column == c && piece.row == targetRow) {
+                    hittingP = piece;
+                    return true;
+                }
+            }
+        }
+
+        /// Pionek poorusza się w prawo
+        for(int c = preCol+1; c < targetCol; c++) {
+            for(Piece piece : GamePanel.simPieces) {
+                if(piece.column == c && piece.row == targetRow) {
+                    hittingP = piece;
+                    return true;
+                }
+            }
+        }
+
+        /// Pionek poorusza się do góry
+        for(int r = preRow-1; r > targetRow; r--) {
+            for(Piece piece : GamePanel.simPieces) {
+                if(piece.column == targetCol && piece.row == r) {
+                    hittingP = piece;
+                    return true;
+                }
+            }
+        }
+
+        /// Pionek poorusza się do dołu
+        for(int r = preRow+1; r < targetRow; r++) {
+            for(Piece piece : GamePanel.simPieces) {
+                if(piece.column == targetCol && piece.row == r) {
+                    hittingP = piece;
+                    return true;
+                }
+            }
+        }
+        /// Nie ma żadnego pionka na drodze
         return false;
     }
 

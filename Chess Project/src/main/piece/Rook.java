@@ -13,5 +13,17 @@ public class Rook extends Piece{
             image = getImage("/res/piece/b_rook") ;
         }
     }
+    public boolean canMove(int targetCol, int targetRow) {
+
+        if(isWithinBoard(targetCol, targetRow) && isSameSquare(targetCol, targetRow) == false) {
+        // Wieża może się poruszać tylko po tej samej kolumnie albo wierszu w któym już się znajduje.
+            if(targetCol == preCol || targetRow == preRow) {
+                if(isValidSquare(targetCol, targetRow) && pieceIsOnStraightLine(targetCol, targetRow) == false) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
         
 }
