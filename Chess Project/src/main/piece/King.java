@@ -20,9 +20,13 @@ public class King extends Piece {
             // Sprawdza, czy docelowa pozycja jest oddalona o jeden kwadrat od poprzedniej pozycji lub na ukos
             if(Math.abs(targetCol - preCol) + Math.abs(targetRow - preRow) == 1 ||
                 Math.abs(targetCol - preCol) * Math.abs(targetRow - preRow) == 1) {
-                return true; // Zwraca true, jeśli ruch jest możliwy
+
+                if(isValidSquare(targetCol, targetRow)) {
+                    return true;                                                // Zwraca true, jeśli ruch jest możliwy
+                }
             }
         }
-        return false; // Zwraca false, jeśli ruch jest niemożliwy
+        
+        return false;                                                           // Zwraca false, jeśli ruch jest niemożliwy
     }
 }

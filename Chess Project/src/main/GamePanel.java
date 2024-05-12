@@ -78,7 +78,7 @@ public class GamePanel extends JPanel implements Runnable{
         pieces.add(new Bishop(WHITE, 2, 7));
         pieces.add(new Bishop(WHITE, 5, 7));
         pieces.add(new Queen(WHITE, 3, 7));
-        pieces.add(new King(WHITE, 4, 7));
+        pieces.add(new King(WHITE, 4, 4));
 
         //Czarne pionki
         pieces.add(new Pawn(BLACK, 0, 1));
@@ -153,13 +153,20 @@ public class GamePanel extends JPanel implements Runnable{
 }
 
         //// Przycisk myszy puszczony ////
-        if (!mouse.pressed) {                                                   // Sprawdza, czy przycisk myszy został puszczony.
+        if (mouse.pressed == false) {                                                   // Sprawdza, czy przycisk myszy został puszczony.
 
             if (activeP != null) {                                              // Sprawdza, czy aktywny pionek istnieje.
                 
                 if(validSquare) {
+
+                    ///Ruch Potwierdzony
+
+                    ///Zaktualizuj listę pionków w sytuacji gdy zostanie zajęty i usunięty w trakcie symulacji
+                    copyPieces(simPieces, pieces);
                     activeP.updatePosition();                                   // Aktualizuje pozycję aktywnego pionka.
                 } else {
+                    /// Ruch nie jest możliwy, zresetuj wszystko
+                    copyPieces(pieces, simPieces);
                     activeP.resetPosition();
                     activeP = null;                                             // Resetuje aktywnego pionka.
                 }
@@ -173,6 +180,9 @@ public class GamePanel extends JPanel implements Runnable{
         canMove = false;
         validSquare = false;
 
+        /// Resetuj listę pionków w każdej pętli
+        copyPieces(pieces, simPieces);
+
         /// Kiedy pionek jest trzymany, zaktualizuj jego pozycję
         activeP.x = mouse.x - Board.HALF_SQUARE_SIZE;                           // Ustawia pozycję x aktywnego pionka na pozycję myszy z odjęciem połowy rozmiaru kwadratu planszy.
         activeP.y = mouse.y - Board.HALF_SQUARE_SIZE;                           // Ustawia pozycję y aktywnego pionka na pozycję myszy z odjęciem połowy rozmiaru kwadratu planszy.
@@ -183,6 +193,12 @@ public class GamePanel extends JPanel implements Runnable{
         if(activeP.canMove(activeP.column, activeP.row)) {
 
             canMove = true;
+
+            /// Zbijanie wrogiego pionka
+            if(activeP.hittingP != null) {
+                simPieces.remove(activeP.hittingP.getIndex());
+            }
+
             validSquare = true;
         }
     }
