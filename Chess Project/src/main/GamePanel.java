@@ -38,6 +38,10 @@ public class GamePanel extends JPanel implements Runnable{
     public static final int BLACK = 1;                                          // Stała, reprezentująca kolor czarny
     int currentColor = WHITE;                                                   // kolor gracza który zaczyna grę
 
+    /// BOOLEANS
+    boolean canMove;
+    boolean validSquare;
+
     /// Konstruktor klasy GamePanel
     public GamePanel() {
         setPreferredSize(new Dimension(WIDTH,HEIGHT));                          //ustawia rozmiar panelu korzystająć z obiektu 'Dimension'
@@ -150,19 +154,37 @@ public class GamePanel extends JPanel implements Runnable{
 
         //// Przycisk myszy puszczony ////
         if (!mouse.pressed) {                                                   // Sprawdza, czy przycisk myszy został puszczony.
+
             if (activeP != null) {                                              // Sprawdza, czy aktywny pionek istnieje.
-                activeP.updatePosition();                                       // Aktualizuje pozycję aktywnego pionka.
-                activeP = null;                                                 // Resetuje aktywnego pionka.
+                
+                if(validSquare) {
+                    activeP.updatePosition();                                   // Aktualizuje pozycję aktywnego pionka.
+                } else {
+                    activeP.resetPosition();
+                    activeP = null;                                             // Resetuje aktywnego pionka.
+                }
             }
         }
     }
     
      /// Metoda symulująca ruch aktywnego pionka na podstawie pozycji myszy.
     private void simulate() {
+
+        canMove = false;
+        validSquare = false;
+
+        /// Kiedy pionek jest trzymany, zaktualizuj jego pozycję
         activeP.x = mouse.x - Board.HALF_SQUARE_SIZE;                           // Ustawia pozycję x aktywnego pionka na pozycję myszy z odjęciem połowy rozmiaru kwadratu planszy.
         activeP.y = mouse.y - Board.HALF_SQUARE_SIZE;                           // Ustawia pozycję y aktywnego pionka na pozycję myszy z odjęciem połowy rozmiaru kwadratu planszy.
         activeP.column = activeP.getCol(activeP.x);                             // Oblicza nową kolumnę aktywnego pionka na podstawie jego nowej pozycji x.
         activeP.row = activeP.getRow(activeP.y);                                // Oblicza nowy rząd aktywnego pionka na podstawie jego nowej pozycji y.
+
+        /// Sprawdza czy pionek jest nad dostępnym polem
+        if(activeP.canMove(activeP.column, activeP.row)) {
+
+            canMove = true;
+            validSquare = true;
+        }
     }
 
     /// Metoda dziedziczona z klasy JPanel która służy do rysowania zawartości panelu.
@@ -180,13 +202,14 @@ public class GamePanel extends JPanel implements Runnable{
         }
 
         ///  RYSOWANIE AKTYWNEGO PIONKA
-        if(activeP != null) {                                                                       // Sprawdza, czy istnieje aktywny pionek.
-        g2.setColor(Color.WHITE);                                                                   // Ustawia kolor na biały.
-        g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.7f));           // Ustawia kompozyt alfa na 0.7 (przezroczystość).
-        g2.fillRect(activeP.column*Board.SQUARE_SIZE, activeP.row*Board.SQUARE_SIZE,
-        Board.SQUARE_SIZE, Board.SQUARE_SIZE);                                                      // Rysuje prostokąt pod aktywnym pionkiem.
-        g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));             // Resetuje kompozyt alfa.
-
+        if(activeP != null) {
+            if(canMove) {                                                                           // Sprawdza, czy istnieje aktywny pionek.
+                g2.setColor(Color.WHITE);                                                           // Ustawia kolor na biały.
+                g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.7f));   // Ustawia kompozyt alfa na 0.7 (przezroczystość).
+                g2.fillRect(activeP.column*Board.SQUARE_SIZE, activeP.row*Board.SQUARE_SIZE,
+                    Board.SQUARE_SIZE, Board.SQUARE_SIZE);                                              // Rysuje prostokąt pod aktywnym pionkiem.
+                g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));     // Resetuje kompozyt alfa.
+            }
         activeP.draw(g2);                                                                           // Rysuje aktywny pionek.
         }
     }

@@ -13,7 +13,7 @@ public class Piece {
     
     public BufferedImage image;                                                 // Obrazek reprezentujący pionek
     public int x, y;                                                            // Pozycja pionka na ekranie
-    public int column, row, preColumn, preRow;                                  // Kolumna i wiersz, w którym znajduje się pionek, oraz jego poprzednia pozycja
+    public int column, row, preCol, preRow;                                  // Kolumna i wiersz, w którym znajduje się pionek, oraz jego poprzednia pozycja
     public int color;                                                           // Kolor pionka
 
     /// Kontruktor klasy Piece
@@ -24,7 +24,7 @@ public class Piece {
         this.row = row;
         x = getX(column);                                                       // Obliczenie pozycji x na podstawie kolumny
         y = getY(row);                                                          // Obliczenie pozycji y na podstawie wiersza
-        preColumn = column;                                                     // Ustawienie poprzedniej kolumny na aktualną kolumnę
+        preCol = column;                                                     // Ustawienie poprzedniej kolumny na aktualną kolumnę
         preRow = row;                                                           // Ustawienie poprzedniego wiersza na aktualny wiersz
     }
     
@@ -65,12 +65,26 @@ public class Piece {
     public void updatePosition() {
         x = getX(column);                                                       // Aktualizuje pozycję x na podstawie aktualnej kolumny
         y = getY(row);                                                          // Aktualizuje pozycję y na podstawie aktualnego wiersza
-        preColumn = getCol(x);                                                  // Aktualizuje poprzednią kolumnę na podstawie nowej wartości x
+        preCol = getCol(x);                                                     // Aktualizuje poprzednią kolumnę na podstawie nowej wartości x
         preRow = getRow(y);                                                     // Aktualizuje poprzedni wiersz na podstawie nowej wartości y
+    }
+
+    public void resetPosition() {
+        column = preCol;
+        row = preRow;
+        x = getX(column);
+        y = getY(row);
     }
 
     /// Metoda sprawdzająca możliwość ruchu pionka na planszy.
     public boolean canMove(int targetCol, int targetRow) {
+        return false;
+    }
+
+    public boolean isWithinBoard(int targetCol, int targetRow) {
+        if(targetCol >= 0 && targetCol <= 7 && targetRow >= 0 && targetRow <= 7) {
+            return true;
+        }
         return false;
     }
 
