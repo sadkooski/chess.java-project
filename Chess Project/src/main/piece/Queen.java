@@ -13,5 +13,26 @@ public class Queen extends Piece{
             image = getImage("/res/piece/b_queen") ;
         }
     }
+
+    public boolean canMove(int targetCol, int targetRow) {
+
+        if(isWithinBoard(targetCol, targetRow) && isSameSquare(targetCol, targetRow) == false) {
+
+            /// Ruch pionowy i poziomy
+            if(targetCol == preCol || targetRow == preRow) {
+                if(isValidSquare(targetCol, targetRow) && pieceIsOnStraightLine(targetCol, targetRow) == false) {
+                    return true;
+                }
+            }
+
+            /// Ruch ukośny
+            if(Math.abs(targetCol - preCol) == Math.abs(targetRow - preRow)) {
+                if(isValidSquare(targetCol, targetRow) && pieceIsOnDiagonalLine(targetCol, targetRow) == false) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
         
 }
