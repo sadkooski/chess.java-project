@@ -177,6 +177,57 @@ public class Piece {
         return false;
     }
 
+    public boolean pieceIsOnDiagonalLine(int targetCol, int targetRow) {
+
+        if(targetRow < preRow) {
+        /// Górny lewy skos
+            for(int c = preCol-1; c > targetCol; c-- ) {
+                int diff = Math.abs(c - preCol);
+                for(Piece piece : GamePanel.simPieces) {
+                    if(piece.column == c && piece.row == preRow - diff) {
+                        hittingP = piece;
+                        return true;
+                    }
+                }
+            }
+        /// Górny prawy skos
+            for(int c = preCol+1; c < targetCol; c++ ) {
+                int diff = Math.abs(c - preCol);
+                for(Piece piece : GamePanel.simPieces) {
+                    if(piece.column == c && piece.row == preRow - diff) {
+                        hittingP = piece;
+                        return true;
+                    }
+                }
+            }
+        }
+        
+        if(targetRow > preRow) {
+        /// Dolny lewy skos
+            for(int c = preCol-1; c > targetCol; c-- ) {
+                int diff = Math.abs(c - preCol);
+                for(Piece piece : GamePanel.simPieces) {
+                    if(piece.column == c && piece.row == preRow + diff) {
+                        hittingP = piece;
+                        return true;
+                    }
+                }
+            }
+        /// Dolny lewy skos
+            for(int c = preCol+1; c < targetCol; c++ ) {
+                int diff = Math.abs(c - preCol);
+                for(Piece piece : GamePanel.simPieces) {
+                    if(piece.column == c && piece.row == preRow + diff) {
+                        hittingP = piece;
+                        return true;
+                    }
+                }
+            }
+        }
+
+        return false;
+    }
+
     /// Metoda rysująca pionek na planszy.
     public void draw(Graphics2D g2) {
         g2.drawImage(image, x, y, Board.SQUARE_SIZE, Board.SQUARE_SIZE, null);
