@@ -3,8 +3,10 @@ package main;
 import java.awt.AlphaComposite;
 import java.awt.Color;                                                          //Importuje klasę Color z pakietu java.awt, która pozwala używać kolorów w interfejsie użytkownika.
 import java.awt.Dimension;                                                      //Importuje klasę Dimension z pakietu java.awt, która jest używana do określania wymiarów obiektów, takich jak rozmiar panelu.
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;                                                     // Importuje klasę Graphics2D z pakietu java.awt, która dostarcza bardziej zaawansowane funkcje rysowania.
+import java.awt.RenderingHints;
 import java.util.ArrayList;
 
 import javax.swing.JPanel;                                                      //Importuje klasę JPanel z pakietu javax.swing, która jest kontenerem, który można używać do grupowania innych komponentów GUI.
@@ -21,7 +23,7 @@ import main.piece.Rook;
 //// że GamePanel będzie działać jak standardowy panel swingowy oraz będzie możliwe uruchomienie go jako wątek.
 public class GamePanel extends JPanel implements Runnable{
     
-    public static final int WIDTH = 1250;                                       //stała, szerokość panelu
+    public static final int WIDTH = 1300;                                       //stała, szerokość panelu
     public static final int HEIGHT = 1000;                                      //stała, wysokość panelu
     final int FPS = 60;                                                         // Stała, liczba klatek na sekundę
     Thread gameThread;                                                          // Wątek gry
@@ -77,7 +79,7 @@ public class GamePanel extends JPanel implements Runnable{
         pieces.add(new Knight(WHITE, 6, 7));
         pieces.add(new Bishop(WHITE, 2, 7));
         pieces.add(new Bishop(WHITE, 5, 7));
-        pieces.add(new Queen(WHITE, 3, 4));
+        pieces.add(new Queen(WHITE, 3, 7));
         pieces.add(new King(WHITE, 4, 7));
 
         //Czarne pionki
@@ -239,6 +241,17 @@ public class GamePanel extends JPanel implements Runnable{
                 g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));     // Resetuje kompozyt alfa.
             }
         activeP.draw(g2);                                                                           // Rysuje aktywny pionek.
+        }
+
+        /// Pop Up'y o statusie gry
+        g2.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+        g2.setFont(new Font("Book Antiqua", Font.PLAIN, 40));
+        g2.setColor(Color.white);
+
+        if(currentColor == WHITE) {
+            g2.drawString("Ruch białego", 1015, 750);
+        } else {
+            g2.drawString("Ruch czarnego", 1015, 250);
         }
     }
 }
