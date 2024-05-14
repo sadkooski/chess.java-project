@@ -164,6 +164,8 @@ public class GamePanel extends JPanel implements Runnable{
                     ///Zaktualizuj listę pionków w sytuacji gdy zostanie zajęty i usunięty w trakcie symulacji
                     copyPieces(simPieces, pieces);
                     activeP.updatePosition();                                   // Aktualizuje pozycję aktywnego pionka.
+
+                    changePlayer();
                 } else {
                     /// Ruch nie jest możliwy, zresetuj wszystko
                     copyPieces(pieces, simPieces);
@@ -201,6 +203,16 @@ public class GamePanel extends JPanel implements Runnable{
 
             validSquare = true;
         }
+    }
+
+    private void changePlayer() {
+
+        if(currentColor == WHITE) {
+            currentColor = BLACK;
+        } else {
+            currentColor = WHITE;
+        }
+        activeP = null;
     }
 
     /// Metoda dziedziczona z klasy JPanel która służy do rysowania zawartości panelu.
