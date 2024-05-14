@@ -17,6 +17,7 @@ public class Piece {
     public int column, row, preCol, preRow;                                  // Kolumna i wiersz, w którym znajduje się pionek, oraz jego poprzednia pozycja
     public int color;                                                           // Kolor pionka
     public Piece hittingP;
+    public boolean moved;
 
     /// Kontruktor klasy Piece
     public Piece(int color, int column, int row) {
@@ -78,6 +79,7 @@ public class Piece {
         y = getY(row);                                                          // Aktualizuje pozycję y na podstawie aktualnego wiersza
         preCol = getCol(x);                                                     // Aktualizuje poprzednią kolumnę na podstawie nowej wartości x
         preRow = getRow(y);                                                     // Aktualizuje poprzedni wiersz na podstawie nowej wartości y
+        moved = true;
     }
 
     public void resetPosition() {
