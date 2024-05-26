@@ -2,7 +2,7 @@ package main.piece;
 
 import main.GamePanel;
 
-public class Knight extends Piece{
+public class Knight extends Piece {
 
     public Knight(int color, int column, int row) {
         super(color, column, row);
@@ -17,13 +17,12 @@ public class Knight extends Piece{
 
         if(isWithinBoard(targetCol, targetRow)) {
             /// Goniec może się poruszać tylko jeśli jego movement ratio w kolumnnie i wierszu planszy wynosi 1:2 albo 2:1
-            if(Math.abs(targetCol - preCol) * Math.abs(targetRow - preRow) == 2) {
+            if(Math.abs(targetCol - preCol) * Math.abs(targetRow - preRow) == 2) {                  // Sprawdza, czy docelowa pozycja jest oddalona o dwa kwadraty na ukos od poprzedniej pozycji
                 if(isValidSquare(targetCol, targetRow)) {
-                    return true;
+                    return true;                                                // Zwraca true, jeśli ruch jest możliwy
                 }
             }
         }
-        return false;
+        return false;                                                       // Zwraca false, jeśli ruch jest niemożliwy
     }
-        
 }

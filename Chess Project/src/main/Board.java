@@ -1,7 +1,7 @@
 package main;
 
-import java.awt.Color;
-import java.awt.Graphics2D;
+import java.awt.Color;                                                          // Importuje klasę Color z pakietu java.awt, która reprezentuje kolor w przestrzeni barw RGB lub RGBA.
+import java.awt.Graphics2D;                                                     // Importuje klasę Graphics2D z pakietu java.awt, która jest zaawansowaną wersją klasy Graphics, umożliwiającą bardziej precyzyjne rysowanie i kontrolę nad grafiką.
 
 public class Board {
     

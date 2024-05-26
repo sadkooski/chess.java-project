@@ -15,15 +15,16 @@ public class Rook extends Piece{
     }
     public boolean canMove(int targetCol, int targetRow) {
 
-        if(isWithinBoard(targetCol, targetRow) && isSameSquare(targetCol, targetRow) == false) {
-        // Wieża może się poruszać tylko po tej samej kolumnie albo wierszu w któym już się znajduje.
-            if(targetCol == preCol || targetRow == preRow) {
+        if(isWithinBoard(targetCol, targetRow) && isSameSquare(targetCol, targetRow) == false) {    // Sprawdza, czy docelowe pole jest w granicach planszy i nie jest tym samym polem co obecne.
+                                                                                                    // Wieża może się poruszać tylko po tej samej kolumnie albo wierszu, na którym się znajduje
+            if(targetCol == preCol || targetRow == preRow) {                                        // Sprawdza, czy docelowe pole znajduje się w tej samej kolumnie lub wierszu co obecne pole.
+
                 if(isValidSquare(targetCol, targetRow) && pieceIsOnStraightLine(targetCol, targetRow) == false) {
-                    return true;
+                    return true;                                                                    // Zwraca true, gdy ruch jest możliwy i nie ma przeszkód na drodze.
                 }
             }
         }
-        return false;
+        return false;                                                           // Zwraca false, gdy ruch jest niemożliwy.
     }
         
 }

@@ -17,22 +17,22 @@ public class Queen extends Piece{
     public boolean canMove(int targetCol, int targetRow) {
 
         if(isWithinBoard(targetCol, targetRow) && isSameSquare(targetCol, targetRow) == false) {
-
+    
             /// Ruch pionowy i poziomy
             if(targetCol == preCol || targetRow == preRow) {
                 if(isValidSquare(targetCol, targetRow) && pieceIsOnStraightLine(targetCol, targetRow) == false) {
-                    return true;
+                    return true;                                                // Zwraca true, gdy ruch jest możliwy w pionie lub poziomie i nie ma przeszkód.
                 }
             }
-
+    
             /// Ruch ukośny
             if(Math.abs(targetCol - preCol) == Math.abs(targetRow - preRow)) {
                 if(isValidSquare(targetCol, targetRow) && pieceIsOnDiagonalLine(targetCol, targetRow) == false) {
-                    return true;
+                    return true;                                                // Zwraca true, gdy ruch jest możliwy na ukos i nie ma przeszkód.
                 }
             }
         }
-        return false;
+        return false;                                                           // Zwraca false, gdy ruch na docelowe pole jest niemożliwy.
     }
         
 }

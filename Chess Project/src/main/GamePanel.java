@@ -1,13 +1,13 @@
 package main;
 
-import java.awt.AlphaComposite;
+import java.awt.AlphaComposite;                                                 // Importuje klasę AlphaComposite z pakietu java.awt, która umożliwia manipulowanie przezroczystością obiektów graficznych.
 import java.awt.Color;                                                          //Importuje klasę Color z pakietu java.awt, która pozwala używać kolorów w interfejsie użytkownika.
 import java.awt.Dimension;                                                      //Importuje klasę Dimension z pakietu java.awt, która jest używana do określania wymiarów obiektów, takich jak rozmiar panelu.
-import java.awt.Font;
-import java.awt.Graphics;
+import java.awt.Font;                                                           // Importuje klasę Font z pakietu java.awt, która jest używana do reprezentowania czcionek w grafice.
+import java.awt.Graphics;                                                       // Importuje klasę Graphics z pakietu java.awt, która dostarcza funkcje rysowania na powierzchni komponentu.
 import java.awt.Graphics2D;                                                     // Importuje klasę Graphics2D z pakietu java.awt, która dostarcza bardziej zaawansowane funkcje rysowania.
-import java.awt.RenderingHints;
-import java.util.ArrayList;
+import java.awt.RenderingHints;                                                 // Importuje klasę RenderingHints z pakietu java.awt, która pozwala kontrolować jakość renderowania grafiki, taką jak antyaliasing.
+import java.util.ArrayList;                                                     // Importuje klasę ArrayList z pakietu java.util, która jest używana do tworzenia dynamicznych tablic, które mogą być automatycznie zmieniane w zależności od potrzeb.
 
 import javax.swing.JPanel;                                                      //Importuje klasę JPanel z pakietu javax.swing, która jest kontenerem, który można używać do grupowania innych komponentów GUI.
 
@@ -41,15 +41,15 @@ public class GamePanel extends JPanel implements Runnable{
     int currentColor = WHITE;                                                   // kolor gracza który zaczyna grę
 
     /// BOOLEANS
-    boolean canMove;
-    boolean validSquare;
+    boolean canMove;                                                            // Zmienna określająca, czy pionek może się przesunąć na wybrane pole.
+    boolean validSquare;                                                        // Zmienna określająca, czy wybrane pole jest prawidłowe (dostępne do ruchu).
 
     /// Konstruktor klasy GamePanel
     public GamePanel() {
-        setPreferredSize(new Dimension(WIDTH,HEIGHT));                          //ustawia rozmiar panelu korzystająć z obiektu 'Dimension'
-        setBackground(Color.BLACK);                                             //kolor tła panelu
-        addMouseMotionListener(mouse);
-        addMouseListener(mouse);
+        setPreferredSize(new Dimension(WIDTH,HEIGHT));                          // ustawia rozmiar panelu korzystająć z obiektu 'Dimension'
+        setBackground(Color.BLACK);                                             // kolor tła panelu
+        addMouseMotionListener(mouse);                                          // Dodaje nasłuchiwanie ruchów myszy.
+        addMouseListener(mouse);                                                // Dodaje nasłuchiwanie zdarzeń myszy.
 
         setPieces();                                                            // Inicjalizacja pionków na planszy
         copyPieces(pieces, simPieces);                                          // Skopiowanie pionków do symulowanej gry
@@ -118,7 +118,7 @@ public class GamePanel extends JPanel implements Runnable{
         double drawInterval = 1000000000.0 / FPS;                               // Określa interwał czasowy między klatkami gry, aby osiągnąć pożądane FPS (klatki na sekundę).
         double delta = 0;                                                       // Przechowuje ilość czasu, która upłynęła od ostatniej aktualizacji gry.
         long lastTime = System.nanoTime();                                      // Pobiera czas systemowy w nanosekundach na początku pętli.
-        long currentTime;
+        long currentTime;                                                       // Aktualny czas systemowy.
     
         while(gameThread != null) {                                             // Pętla będzie działać dopóki wątek gry jest aktywny.
     
@@ -155,7 +155,7 @@ public class GamePanel extends JPanel implements Runnable{
 }
 
         //// Przycisk myszy puszczony ////
-        if (mouse.pressed == false) {                                                   // Sprawdza, czy przycisk myszy został puszczony.
+        if (mouse.pressed == false) {                                           // Sprawdza, czy przycisk myszy został puszczony.
 
             if (activeP != null) {                                              // Sprawdza, czy aktywny pionek istnieje.
                 
@@ -164,14 +164,14 @@ public class GamePanel extends JPanel implements Runnable{
                     ///Ruch Potwierdzony
 
                     ///Zaktualizuj listę pionków w sytuacji gdy zostanie zajęty i usunięty w trakcie symulacji
-                    copyPieces(simPieces, pieces);
+                    copyPieces(simPieces, pieces);                              // Kopiuje pionki z listy symulowanej do głównej listy pionków.
                     activeP.updatePosition();                                   // Aktualizuje pozycję aktywnego pionka.
 
                     changePlayer();
                 } else {
                     /// Ruch nie jest możliwy, zresetuj wszystko
-                    copyPieces(pieces, simPieces);
-                    activeP.resetPosition();
+                    copyPieces(pieces, simPieces);                              // Kopiuje pionki z głównej listy pionków do listy symulowanej.
+                    activeP.resetPosition();                                    // Resetuje pozycję aktywnego pionka.
                     activeP = null;                                             // Resetuje aktywnego pionka.
                 }
             }
@@ -196,25 +196,24 @@ public class GamePanel extends JPanel implements Runnable{
         /// Sprawdza czy pionek jest nad dostępnym polem
         if(activeP.canMove(activeP.column, activeP.row)) {
 
-            canMove = true;
+            canMove = true;                                                     // Ustawia flagę canMove na true, jeśli pionek może być przesunięty.
 
             /// Zbijanie wrogiego pionka
-            if(activeP.hittingP != null) {
-                simPieces.remove(activeP.hittingP.getIndex());
+            if(activeP.hittingP != null) {                                      // Sprawdza, czy aktywny pionek zbijany jest jakimś innym pionkiem.
+                simPieces.remove(activeP.hittingP.getIndex());                  // Usuwa zbijany pionek z listy symulowanych pionków.
             }
-
-            validSquare = true;
+    
+            validSquare = true;                                                 // Ustawia flagę validSquare na true, jeśli pole, na które może być przesunięty pionek, jest dostępne.
         }
     }
-
+     /// Metoda zmieniająca kolejność ruchu gracza co turę 
     private void changePlayer() {
-
-        if(currentColor == WHITE) {
-            currentColor = BLACK;
+        if(currentColor == WHITE) {                                             // Sprawdza, czy aktualny kolor to biały.
+            currentColor = BLACK;                                               // Jeśli tak, zmienia aktualny kolor na czarny.
         } else {
-            currentColor = WHITE;
+            currentColor = WHITE;                                               // Jeśli nie, zmienia aktualny kolor na biały.
         }
-        activeP = null;
+        activeP = null;                                                         // Resetuje aktywnego pionka na null.
     }
 
     /// Metoda dziedziczona z klasy JPanel która służy do rysowania zawartości panelu.
@@ -244,14 +243,14 @@ public class GamePanel extends JPanel implements Runnable{
         }
 
         /// Pop Up'y o statusie gry
-        g2.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
-        g2.setFont(new Font("Book Antiqua", Font.PLAIN, 40));
-        g2.setColor(Color.white);
-
-        if(currentColor == WHITE) {
-            g2.drawString("Ruch białego", 1015, 750);
+        g2.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);              // Ustawienie wygładzania tekstu dla lepszej jakości renderowania.
+        g2.setFont(new Font("Book Antiqua", Font.PLAIN, 40));                                                 // Ustawienie czcionki tekstu.
+        g2.setColor(Color.white);                                                                                       // Ustawienie koloru tekstu na biały.
+        
+        if(currentColor == WHITE) {                                                                                     // Sprawdzenie, czy aktualny kolor to biały.
+            g2.drawString("Ruch białego", 1015, 750);                                                           // Jeśli tak, wyświetlenie komunikatu "Ruch białego" na panelu gry.
         } else {
-            g2.drawString("Ruch czarnego", 1015, 250);
+            g2.drawString("Ruch czarnego", 1015, 250);                                                          // Jeśli nie, wyświetlenie komunikatu "Ruch czarnego" na panelu gry.
         }
     }
 }
