@@ -5,9 +5,7 @@
 
 ## Opis
 
-- Projekt ten ma na celu stworzenie funkcjonalnej gry w szachy w języku Java. Zawiera różne klasy dla różnych figur szachowych, planszę do gry oraz logikę gry.
-
-- Oto opis zaimplementowanych funckjonalności:
+- Projekt ten ma na celu stworzenie funkcjonalnej gry w szachy w języku Java. Zawiera różne klasy dla różnych figur szachowych, planszę do gry oraz logikę gry wraz z szatą graficzną.
 
 ## Funkcje
 
