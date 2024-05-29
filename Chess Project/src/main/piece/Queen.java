@@ -21,18 +21,18 @@ public class Queen extends Piece{
             /// Ruch pionowy i poziomy
             if(targetCol == preCol || targetRow == preRow) {
                 if(isValidSquare(targetCol, targetRow) && pieceIsOnStraightLine(targetCol, targetRow) == false) {
-                    return true;                                                // Zwraca true, gdy ruch jest możliwy w pionie lub poziomie i nie ma przeszkód.
+                    return true;
                 }
             }
     
             /// Ruch ukośny
             if(Math.abs(targetCol - preCol) == Math.abs(targetRow - preRow)) {
                 if(isValidSquare(targetCol, targetRow) && pieceIsOnDiagonalLine(targetCol, targetRow) == false) {
-                    return true;                                                // Zwraca true, gdy ruch jest możliwy na ukos i nie ma przeszkód.
+                    return true;
                 }
             }
         }
-        return false;                                                           // Zwraca false, gdy ruch na docelowe pole jest niemożliwy.
+        return false;
     }
         
 }

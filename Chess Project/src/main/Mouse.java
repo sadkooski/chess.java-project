@@ -1,12 +1,12 @@
 package main;
 
-import java.awt.event.MouseAdapter;                                             // Importuje klasę MouseAdapter z pakietu java.awt.event, która umożliwia obsługę zdarzeń myszy.
-import java.awt.event.MouseEvent;                                               // Importuje klasę MouseEvent z pakietu java.awt.event, która reprezentuje zdarzenia związane z myszą.
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class Mouse extends MouseAdapter {
 
-    public int x, y;                                                            // Współrzędne x i y myszy.
-    public boolean pressed;                                                     // Flaga określająca, czy przycisk myszy jest wciśnięty
+    public int x, y;
+    public boolean pressed;
     
     /// Metoda obsługująca zdarzenie wciśnięcia przycisku myszy.
     @Override

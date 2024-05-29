@@ -16,36 +16,36 @@ public class Pawn extends Piece{
 
     public boolean canMove(int targetCol, int targetRow) {
 
-        if(isWithinBoard(targetCol, targetRow) && isSameSquare(targetCol, targetRow) == false) {    // Sprawdza, czy docelowe pole mieści się na planszy i nie jest takie samo jak poprzednie pole
+        if(isWithinBoard(targetCol, targetRow) && isSameSquare(targetCol, targetRow) == false) {
     
             /// Definicja ruchu pionka bazując na kolorze gracza (białe tylko do góry, czarne tylko do dołu)
             int moveValue;
             if(color == GamePanel.WHITE) {
-                moveValue = -1;                                                                     // Dla białych pionków, ruch jest w kierunku ujemnych wartości rzędów
+                moveValue = -1;
             } else {
-                moveValue = 1;                                                                      // Dla czarnych pionków, ruch jest w kierunku dodatnich wartości rzędów
+                moveValue = 1;
             }
     
             /// Sprawdzanie zbijanego pionka
-            hittingP = getHittingP(targetCol, targetRow);                                           // Sprawdza, czy na docelowym polu znajduje się pionek, który może zostać zbity
+            hittingP = getHittingP(targetCol, targetRow);
     
             /// Ruch o 1 pole
             if(targetCol == preCol && targetRow == preRow + moveValue && hittingP == null) {
-                return true;                                                                         // Zwraca true, jeśli ruch jest możliwy o 1 pole do przodu i na docelowym polu nie ma żadnego pionka
+                return true;
             }
     
             /// Ruch o 2 pola
             if(targetCol == preCol && targetRow == preRow + moveValue*2 && hittingP == null &&
                     moved == false && pieceIsOnStraightLine(targetCol, targetRow) == false) {
-                return true;                                                                        // Zwraca true, jeśli ruch jest możliwy o 2 pola do przodu, na docelowym polu nie ma żadnego pionka, pionek nie był wcześniej przesuwany, a ruch nie jest w linii prostego ruchu
+                return true;
             }
             /// Bicie na ukos
             if(Math.abs(targetCol - preCol) == 1 && targetRow == preRow + moveValue &&
                     hittingP != null && hittingP.color != color) {
-                return true;                                                                        // Zwraca true, jeśli ruch jest możliwy do wykonania na ukos i na docelowym polu znajduje się pionek przeciwnego koloru
+                return true;
             }
         }
-        return false;                                                                               // Zwraca false, jeśli ruch nie jest możliwy
+        return false;
     }
     
 }

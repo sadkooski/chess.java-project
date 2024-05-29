@@ -17,12 +17,12 @@ public class Knight extends Piece {
 
         if(isWithinBoard(targetCol, targetRow)) {
             /// Goniec może się poruszać tylko jeśli jego movement ratio w kolumnnie i wierszu planszy wynosi 1:2 albo 2:1
-            if(Math.abs(targetCol - preCol) * Math.abs(targetRow - preRow) == 2) {                  // Sprawdza, czy docelowa pozycja jest oddalona o dwa kwadraty na ukos od poprzedniej pozycji
+            if(Math.abs(targetCol - preCol) * Math.abs(targetRow - preRow) == 2) {
                 if(isValidSquare(targetCol, targetRow)) {
-                    return true;                                                // Zwraca true, jeśli ruch jest możliwy
+                    return true;
                 }
             }
         }
-        return false;                                                       // Zwraca false, jeśli ruch jest niemożliwy
+        return false;
     }
 }
