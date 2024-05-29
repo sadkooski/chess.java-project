@@ -17,62 +17,53 @@
 - Graficzny interfejs użytkownika (GUI)
 
 - Main.java
-1. Tworzenie głównego okna aplikacji za pomocą klasy JFrame, które reprezentuje okno aplikacji.
-2. Konfiguracja działania aplikacji, takiej jak obsługa zamknięcia okna.
-3. Uniemożliwienie zmiany rozmiaru okna przez użytkownika.
-4. Tworzenie panelu gry (GamePanel) i dodawanie go do głównego okna.
-5. Dopasowywanie rozmiaru okna do rozmiaru panelu gry.
-6. Ustawienie położenia okna na środku ekranu.
-7. Ustawienie widoczności okna.
-8. Uruchamianie gry poprzez wywołanie metody launchGame() na panelu gry.
+- Definiuje klasę Main.
+- Zawiera metodę main, która jest punktem wejścia programu.
+- Tworzy główne okno aplikacji typu JFrame.
+- Konfiguruje główne okno aplikacji, ustawiając tytuł, obsługę zamknięcia okna oraz niemożliwość zmiany rozmiaru.
+- Tworzy obiekt klasy GamePanel (panel gry) i dodaje go do głównego okna aplikacji.
+- Pakuje elementy w oknie, aby dopasować je do preferowanych rozmiarów.
+- Ustawia położenie głównego okna aplikacji na środku ekranu.
+- Ustawia widoczność głównego okna aplikacji.
+- Uruchamia grę poprzez wywołanie metody launchGame() na obiekcie GamePanel.
 
 - Mouse.java
-1. Tworzenie głównego okna aplikacji za pomocą klasy JFrame, która reprezentuje okno aplikacji.
-2. Konfiguracja działania aplikacji, takiej jak obsługa zamknięcia okna.
-3. Uniemożliwienie zmiany rozmiaru okna przez użytkownika.
-4. Tworzenie panelu gry (GamePanel) i dodawanie go do głównego okna.
-5. Dopasowywanie rozmiaru okna do rozmiaru panelu gry.
-6. Ustawienie położenia okna na środku ekranu.
-7. Ustawienie widoczności okna.
-8. Uruchamianie gry poprzez wywołanie metody launchGame() na panelu gry.
-9. Implementacja obsługi zdarzeń myszy za pomocą klasy Mouse i jej metod:
-    - mousePressed(MouseEvent e) - obsługuje zdarzenie wciśnięcia przycisku myszy.
-    - mouseReleased(MouseEvent e) - obsługuje zdarzenie puszczenia przycisku myszy.
-    - mouseDragged(MouseEvent e) - obsługuje zdarzenie przeciągania myszy.
-    - mouseMoved(MouseEvent e) - obsługuje zdarzenie ruchu myszy.
+- Definiuje klasę Mouse, która rozszerza klasę MouseAdapter i obsługuje zdarzenia związane z myszą.
+- Zawiera zmienne x i y, które przechowują aktualne współrzędne myszy.
+- Zawiera zmienną logiczną pressed, która określa, czy przycisk myszy jest aktualnie wciśnięty.
+- Metoda mousePressed(MouseEvent e) obsługuje zdarzenie wciśnięcia przycisku myszy i ustawia zmienną pressed na true.
+- Metoda mouseReleased(MouseEvent e) obsługuje zdarzenie puszczenia przycisku myszy i ustawia zmienną pressed na false.
+- Metoda mouseDragged(MouseEvent e) obsługuje zdarzenie przeciągania myszy i aktualizuje zmienne x i y na podstawie aktualnej pozycji myszy.
+- Metoda mouseMoved(MouseEvent e) obsługuje zdarzenie ruchu myszy i aktualizuje zmienne x i y na podstawie aktualnej pozycji myszy.
 
 - GamePanel.java
-1. Tworzenie głównego okna aplikacji za pomocą klasy JPanel, która jest kontenerem dla komponentów GUI.
-2. Inicjalizacja stałych, takich jak szerokość i wysokość panelu oraz liczba klatek na sekundę (FPS).
-3. Utworzenie wątku gry i rozpoczęcie jego działania.
-4. Tworzenie i zarządzanie planszą gry oraz obiektem do obsługi zdarzeń myszy.
-5. Utworzenie list przechowujących pionki na planszy w rzeczywistej i symulowanej grze.
-6. Implementacja metod do ustawiania pionków na planszy dla obydwu graczy oraz kopiowania listy pionków.
-7. Implementacja głównej metody run(), która kontroluje główną pętlę gry (game loop).
-8. Implementacja metody update(), która aktualizuje stan gry w każdej klatce.
-9. Implementacja metod do obsługi ruchu myszy, w tym mousePressed(), mouseReleased(), mouseDragged() i mouseMoved().
-10. Symulowanie ruchu aktywnego pionka na podstawie pozycji myszy.
-11. Zmiana kolejności ruchu gracza co turę.
-12. Rysowanie planszy, pionków i komunikatów na panelu gry za pomocą metod paintComponent() i draw().
-13. Wykorzystanie zaawansowanych funkcji graficznych, takich jak przezroczystość, wygładzanie tekstu i renderowanie dwuwymiarowe (Graphics2D).
+- Definiuje klasę GamePanel, która dziedziczy po klasie JPanel i implementuje interfejs Runnable, co oznacza, że może działać jako standardowy panel swingowy oraz być uruchamiana jako wątek.
+- Zawiera stałe WIDTH i HEIGHT, określające szerokość i wysokość panelu gry.
+- Zawiera zmienną FPS, określającą liczbę klatek na sekundę w grze.
+- Deklaruje wątek gameThread oraz obiekty board i mouse.
+- Zawiera listy pieces i simPieces, które przechowują pionki na planszy oraz ich kopię używaną do symulacji ruchów.
+- Deklaruje zmienną activeP, która przechowuje aktywny pionek.
+- Zawiera stałe WHITE i BLACK, które reprezentują kolor graczy.
+- Zawiera zmienne logiczne canMove i validSquare, które określają możliwość ruchu pionka i poprawność wybranego pola.
+- W konstruktorze GamePanel ustawia preferowany rozmiar panelu, tło na czarny, dodaje nasłuchiwacze zdarzeń myszy oraz inicjuje pionki na planszy.
+- Metoda launchGame() uruchamia grę jako wątek.
+- Metoda setPieces() inicjuje pionki dla obu graczy na planszy.
+- Metoda copyPieces() kopiuje listę pionków z jednej listy do drugiej.
+- Metoda run() implementuje główną pętlę gry (game loop), odpowiedzialną za aktualizację i renderowanie.
+- Metoda update() aktualizuje stan panelu gry na podstawie ruchów myszy.
+- Metoda simulate() symuluje ruch aktywnego pionka na podstawie pozycji myszy.
+- Metoda changePlayer() zmienia aktualnego gracza po wykonaniu ruchu.
+- Metoda paintComponent(Graphics g) rysuje zawartość panelu gry, włącznie z planszą, pionkami, aktywnym pionkiem oraz informacjami o stanie gry (np. ruchu aktualnego gracza).
 
 - Board.java
-1. Rysowanie Planszy:
-    - Klasa Board odpowiedzialna jest za rysowanie szachownicy w interfejsie użytkownika.
-    - Wykorzystuje klasy z pakietu java.awt do rysowania kwadratów reprezentujących pola na planszy.
-    - Określa rozmiar oraz kolory poszczególnych pól na szachownicy.
-2. Inicjowanie Planszy:
-    - Ustala maksymalną liczbę kolumn i wierszy na planszy oraz rozmiar kwadratu reprezentującego pojedyncze pole.
-    - Wykorzystuje stałe wartości do określenia rozmiaru kwadratu oraz jego połowy.
-3. Iteracja przez Pola:
-    - Wykorzystuje pętle iteracyjne do przejścia przez wszystkie pola na planszy.
-    - Określa kolor każdego pola na podstawie jego indeksu w szachownicy.
-4. Rysowanie Kwadratów:
-    - Używa obiektu Graphics2D do rysowania kwadratów na planszy.
-    - Wykorzystuje kolor zdefiniowany dla każdego pola do wypełnienia kwadratu odpowiednim kolorem.
-5. Zmiana Kolorów Pól:
-    - Zapewnia alternujące kolory pól na planszy, aby uzyskać efekt szachownicy.
-    - Iteruje przez wszystkie wiersze i kolumny planszy, aby ustawić odpowiednie kolory dla każdego pola.
+- Definiuje klasę Board, która reprezentuje szachownicę.
+- Zawiera stałe MAX_COLUMN i MAX_ROW ustawione na 8, określające maksymalną liczbę kolumn i wierszy na szachownicy.
+- Zawiera stałe SQUARE_SIZE i HALF_SQUARE_SIZE, które określają rozmiar kwadratu reprezentującego pojedyncze pole na szachownicy oraz jego połowę.
+- Zawiera metodę draw(Graphics2D g2), która rysuje szachownicę na podanej grafice 2D.
+- W metodzie draw, iteruje przez wszystkie pola na szachownicy i wypełnia je odpowiednim kolorem, aby uzyskać efekt szachownicy.
+- Kolory pól są ustawiane na zmiennej color, która zmienia się między białym i czarnym kolorem, aby uzyskać charakterystyczne szachownicowe wzory.
+- Na podstawie wartości zmiennej color ustawiany jest odpowiedni kolor (jasny lub ciemny).
+- Kwadraty są rysowane w odpowiednich kolumnach i wierszach, korzystając z wartości stałych SQUARE_SIZE i HALF_SQUARE_SIZE.
 
 
 ## Instalacja
